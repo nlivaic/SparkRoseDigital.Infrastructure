@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7D32798E-B172-4AA3-AA0A-A991C36705B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DCE428C6-6985-476F-84D3-5833A3DA1D61}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SparkRoseDigital.Infrastructure", "src\SparkRoseDigital.Infrastructure\SparkRoseDigital.Infrastructure.csproj", "{F9B7DF31-5C98-4C78-A6C9-3C2CFF269D0D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9B7DF31-5C98-4C78-A6C9-3C2CFF269D0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9B7DF31-5C98-4C78-A6C9-3C2CFF269D0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9B7DF31-5C98-4C78-A6C9-3C2CFF269D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9B7DF31-5C98-4C78-A6C9-3C2CFF269D0D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F9B7DF31-5C98-4C78-A6C9-3C2CFF269D0D} = {7D32798E-B172-4AA3-AA0A-A991C36705B7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8426C84-E1E3-4D8D-9C94-AFA76E268A0C}
+	EndGlobalSection
+EndGlobal
