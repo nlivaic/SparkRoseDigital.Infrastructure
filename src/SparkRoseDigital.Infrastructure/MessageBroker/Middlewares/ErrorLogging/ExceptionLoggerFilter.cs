@@ -4,7 +4,7 @@ using GreenPipes;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace StackUnderflow.Infrastructure.MessageBroker.Middlewares.ErrorLogging
+namespace SparkRoseDigital.Infrastructure.MessageBroker.Middlewares.ErrorLogging
 {
     public class ExceptionLoggerFilter<T> : IFilter<T>
         where T : class, PipeContext

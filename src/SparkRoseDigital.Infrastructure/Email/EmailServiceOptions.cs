@@ -1,4 +1,4 @@
-namespace StackUnderflow.Infrastructure.Email
+namespace SparkRoseDigital.Infrastructure.Email
 {
     public class EmailServiceOptions
     {

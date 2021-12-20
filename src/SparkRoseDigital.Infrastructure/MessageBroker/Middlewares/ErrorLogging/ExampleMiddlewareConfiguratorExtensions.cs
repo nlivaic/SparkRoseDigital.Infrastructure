@@ -1,7 +1,7 @@
 ﻿using GreenPipes;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace StackUnderflow.Infrastructure.MessageBroker.Middlewares.ErrorLogging
+namespace SparkRoseDigital.Infrastructure.MessageBroker.Middlewares.ErrorLogging
 {
     public static class ExampleMiddlewareConfiguratorExtensions
     {

@@ -1,4 +1,4 @@
-﻿namespace StackUnderflow.Infrastructure.MessageBroker
+﻿namespace SparkRoseDigital.Infrastructure.MessageBroker
 {
     public class MessageBrokerConnectionStringBuilder
     {

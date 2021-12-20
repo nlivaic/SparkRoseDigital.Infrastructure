@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MassTransit;
 
-namespace StackUnderflow.Infrastructure.MessageBroker
+namespace SparkRoseDigital.Infrastructure.MessageBroker
 {
     public class EventPublisher : IEventRegister, IRegisteredEventPublisher
     {

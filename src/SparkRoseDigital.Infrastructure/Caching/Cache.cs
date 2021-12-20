@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace StackUnderflow.Infrastructure.Caching
+namespace SparkRoseDigital.Infrastructure.Caching
 {
     public class Cache : ICache
     {

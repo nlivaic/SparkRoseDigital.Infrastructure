@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace StackUnderflow.Infrastructure.MessageBroker
+namespace SparkRoseDigital.Infrastructure.MessageBroker
 {
     public interface IRegisteredEventPublisher
     {

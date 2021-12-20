@@ -3,7 +3,7 @@ using System.Linq;
 using GreenPipes;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace StackUnderflow.Infrastructure.MessageBroker.Middlewares.ErrorLogging
+namespace SparkRoseDigital.Infrastructure.MessageBroker.Middlewares.ErrorLogging
 {
     public class ExceptionLoggerSpecification<T> : IPipeSpecification<T>
         where T : class, PipeContext

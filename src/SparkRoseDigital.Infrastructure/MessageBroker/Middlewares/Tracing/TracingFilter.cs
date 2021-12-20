@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using GreenPipes;
 using MassTransit;
 
-namespace StackUnderflow.Infrastructure.MessageBroker.Middlewares.Tracing
+namespace SparkRoseDigital.Infrastructure.MessageBroker.Middlewares.Tracing
 {
     public class TracingFilter : IFilter<ConsumeContext>
     {

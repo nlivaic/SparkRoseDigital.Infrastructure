@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace StackUnderflow.Infrastructure.HealthCheck
+namespace SparkRoseDigital.Infrastructure.HealthCheck
 {
     internal class HealthCheckResultModel
     {

@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace StackUnderflow.Infrastructure.MessageBroker
+namespace SparkRoseDigital.Infrastructure.MessageBroker
 {
     public static class ServiceCollectionExtensions
     {

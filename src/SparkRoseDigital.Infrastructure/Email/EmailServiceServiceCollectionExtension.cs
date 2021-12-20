@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace StackUnderflow.Infrastructure.Email.DependencyInjection
+namespace SparkRoseDigital.Infrastructure.Email.DependencyInjection
 {
     public static class EmailServiceServiceCollectionExtension
     {

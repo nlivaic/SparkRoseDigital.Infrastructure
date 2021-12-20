@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace StackUnderflow.Infrastructure.Email
+namespace SparkRoseDigital.Infrastructure.Email
 {
     public interface IEmailService
     {

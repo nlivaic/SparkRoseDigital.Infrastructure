@@ -9,7 +9,7 @@ using Serilog;
 using Serilog.Enrichers.Span;
 using Serilog.Exceptions;
 
-namespace StackUnderflow.Infrastructure.Logging
+namespace SparkRoseDigital.Infrastructure.Logging
 {
     public static class LoggerExtensions
     {

@@ -1,7 +1,7 @@
 ﻿using GreenPipes;
 using MassTransit;
 
-namespace StackUnderflow.Infrastructure.MessageBroker.Middlewares.Tracing
+namespace SparkRoseDigital.Infrastructure.MessageBroker.Middlewares.Tracing
 {
     public static class TracingMiddlewareExtensions
     {

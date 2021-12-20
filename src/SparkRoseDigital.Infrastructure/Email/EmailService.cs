@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using MimeKit;
 using MimeKit.Text;
 
-namespace StackUnderflow.Infrastructure.Email
+namespace SparkRoseDigital.Infrastructure.Email
 {
     public class EmailService : IEmailService
     {

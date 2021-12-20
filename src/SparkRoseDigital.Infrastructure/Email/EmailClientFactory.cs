@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 
-namespace StackUnderflow.Infrastructure.Email
+namespace SparkRoseDigital.Infrastructure.Email
 {
     public class EmailClientFactory
     {

@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+	<PackageId>SparkRoseDigital.Infrastructure</PackageId>
+	<Version>1.0.1</Version>
+	<Authors>SparkRose Digital</Authors>
+	<Company>SparkRose Digital</Company>
+	<Description>
+		This library should be used for cross-cutting infrastructural concerns:
+		logging, tracing, caching, message broker communication, health checks, email communication.
+	</Description>
   </PropertyGroup>
 
   <ItemGroup>
