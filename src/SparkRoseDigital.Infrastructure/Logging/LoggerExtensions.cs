@@ -23,13 +23,14 @@ namespace SparkRoseDigital.Infrastructure.Logging
 
             // Adding Entrypoint here means it is added to every log,
             // regardless if it comes from Hosting or the application itself.
-            new LoggerConfiguration()
+            Log.Logger = new LoggerConfiguration()
                 .Enrich.WithProperty("Entrypoint", Assembly.GetExecutingAssembly().GetName().Name)
                 .Enrich.WithSpan()
                 .Enrich.WithExceptionDetails()
                 .ReadFrom.Configuration(configuration)
                 .WriteTo.Console()
-                .WriteTo.Seq(configuration["Logs:Url"]);
+                .WriteTo.Seq(configuration["Logs:Url"])
+                .CreateLogger();
         }
 
         /// <summary>
