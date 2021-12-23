@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Enrichers.Span;
 using Serilog.Exceptions;
+using SparkRoseDigital.Infrastructure.Logging.Middleware;
 
 namespace SparkRoseDigital.Infrastructure.Logging
 {
@@ -62,5 +64,17 @@ namespace SparkRoseDigital.Infrastructure.Logging
             }
             return host;
         }
+
+        public static void AddLoggingScopes(this IServiceCollection services)
+        {
+            services.AddSingleton<IScopeInformation, ScopeInformation>();
+        }
+
+        public static IApplicationBuilder UseHostLoggingMiddleware(
+            this IApplicationBuilder builder) => builder.UseMiddleware<HostLoggingMiddleware>();
+
+        public static IApplicationBuilder UseUserLoggingMiddleware(
+            this IApplicationBuilder builder) => builder.UseMiddleware<UserLoggingMiddleware>();
+
     }
 }

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
 	<PackageId>SparkRoseDigital.Infrastructure</PackageId>
-	<Version>1.0.2</Version>
+	<Version>1.0.4</Version>
 	<Authors>SparkRose Digital</Authors>
 	<Company>SparkRose Digital</Company>
 	<Description>
