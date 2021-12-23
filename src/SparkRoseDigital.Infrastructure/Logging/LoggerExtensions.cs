@@ -65,16 +65,12 @@ namespace SparkRoseDigital.Infrastructure.Logging
             return host;
         }
 
-        public static void AddLoggingScopes(this IServiceCollection services)
-        {
-            services.AddSingleton<IScopeInformation, ScopeInformation>();
-        }
+        public static void AddLoggingScopes(this IServiceCollection services) => services.AddSingleton<IScopeInformation, ScopeInformation>();
 
         public static IApplicationBuilder UseHostLoggingMiddleware(
             this IApplicationBuilder builder) => builder.UseMiddleware<HostLoggingMiddleware>();
 
         public static IApplicationBuilder UseUserLoggingMiddleware(
             this IApplicationBuilder builder) => builder.UseMiddleware<UserLoggingMiddleware>();
-
     }
 }
