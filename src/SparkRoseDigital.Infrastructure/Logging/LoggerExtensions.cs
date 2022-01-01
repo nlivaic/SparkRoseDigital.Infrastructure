@@ -63,8 +63,6 @@ namespace SparkRoseDigital.Infrastructure.Logging
                 });
             }
             return host;
-        public static void AddApiEventPublisher(this IServiceCollection services, string connectionString)
-        }
 
         public static void AddLoggingScopes(this IServiceCollection services) => services.AddSingleton<IScopeInformation, ScopeInformation>();
 
