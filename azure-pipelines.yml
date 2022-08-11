@@ -17,7 +17,7 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
-- script: dotnet test .\SparkRoseDigital.Infrastructure.sln --configuration $(buildConfiguration)
+- script: dotnet test **/*.csproj --configuration $(buildConfiguration)
   displayName: 'dotnet test $(buildConfiguration)'
 
 # - task: DotNetCoreCLI@2
