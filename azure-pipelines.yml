@@ -22,7 +22,7 @@ steps:
   inputs:
     command: 'test'
     projects: '**/*.csproj'
-    publishTestResults: false
+    publishTestResults: true
     configuration: $(buildConfiguration)
 
 - script: dotnet publish -o $(build.artifactStagingDirectory)
