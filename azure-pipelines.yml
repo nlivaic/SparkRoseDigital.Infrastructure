@@ -36,3 +36,8 @@ steps:
 #     projects: '**/*.csproj'
 #     configuration: $(buildConfiguration)
 #     zipAfterPublish: false
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(build.artifactStagingDirectory)'
+    publishLocation: 'pipeline'
