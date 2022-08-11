@@ -24,11 +24,15 @@ steps:
     projects: '**/*.csproj'
     publishTestResults: false
     configuration: $(buildConfiguration)
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet publish'
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '**/*.csproj'
-    configuration: $(buildConfiguration)
-    zipAfterPublish: false
+
+- script: dotnet publish -o $(build.artifactStagingDirectory)
+  displayName: 'dotnet publish -o $(build.artifactStagingDirectory)'
+
+# - task: DotNetCoreCLI@2
+#   displayName: 'dotnet publish'
+#   inputs:
+#     command: 'publish'
+#     publishWebProjects: false
+#     projects: '**/*.csproj'
+#     configuration: $(buildConfiguration)
+#     zipAfterPublish: false
