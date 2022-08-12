@@ -34,9 +34,10 @@ steps:
 - script: dotnet publish -o $(build.artifactStagingDirectory)
   displayName: 'dotnet publish -o $(build.artifactStagingDirectory)'
 
-- task: NuGetAuthenticate@0
+- task: NuGetAuthenticate@1
   inputs:
-    nuGetServiceConnections: nuget-srd-infra
+    nuGetServiceConnections: 'nuget-srd-infra'
+
 # - task: NuGetCommand@2
 #   inputs:
 #     command: push
