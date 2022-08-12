@@ -12,8 +12,11 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  buildNumber: $(Rev:r)
 
 steps:
+- script: echo $(buildNumber)
+
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
@@ -28,6 +31,16 @@ steps:
 - script: dotnet publish -o $(build.artifactStagingDirectory)
   displayName: 'dotnet publish -o $(build.artifactStagingDirectory)'
 
+- task: NuGetAuthenticate@0
+  inputs:
+    nuGetServiceConnections: nuget-srd-infra
+# - task: NuGetCommand@2
+#   inputs:
+#     command: push
+#     nuGetFeedType: external
+#     versioningScheme: byEnvVar
+#     versionEnvVar: <VERSION_ENVIRONMENT_VARIABLE>
+
 # - task: DotNetCoreCLI@2
 #   displayName: 'dotnet publish'
 #   inputs:
@@ -36,8 +49,3 @@ steps:
 #     projects: '**/*.csproj'
 #     configuration: $(buildConfiguration)
 #     zipAfterPublish: false
-
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(build.artifactStagingDirectory)'
-    publishLocation: 'pipeline'
