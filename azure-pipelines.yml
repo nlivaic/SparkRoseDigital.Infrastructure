@@ -52,7 +52,13 @@ stages:
     - job: deployToNuget
       displayName: "deploy to nuget.org"
       steps:
-      - script: dotnet nuget push $(Build.ArtifactStagingDirectory)/SparkRoseDigital.Infrastructure.$(nugetVersion).nupkg --api-key $(nuget_api_key) --source https://api.nuget.org/v3/index.json
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          buildType: 'current'
+          artifactName: 'drop'
+          downloadPath: '$(Pipeline.Workspace)/drop'
+      
+      - script: dotnet nuget push $(Pipeline.Workspace)/drop/SparkRoseDigital.Infrastructure.$(nugetVersion).nupkg --api-key $(nuget_api_key) --source https://api.nuget.org/v3/index.json
         displayName: 'dotnet nuget push'
 
       # Source: https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive#publish-artifacts-to-azure-pipelines
