@@ -20,6 +20,8 @@ variables:
 
 steps:
 - script: echo 'Pipeline:\sSparkRoseDigital.Infrastructure version $(nugetVersion) \n------------- Build.ArtifactStagingDirectory:\s$(Build.ArtifactStagingDirectory)'
+- script: pwd
+- script: ls -al $(Build.ArtifactStagingDirectory)
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
