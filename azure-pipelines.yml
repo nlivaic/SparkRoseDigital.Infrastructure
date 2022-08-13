@@ -19,7 +19,7 @@ variables:
   nugetVersion: '$(major).$(minor).$(revision)'
 
 steps:
-- script: echo $(nugetVersion)
+- script: echo "Pipeline:\sSparkRoseDigital.Infrastructure version $(nugetVersion) \n------------- Build.ArtifactStagingDirectory:\s$(Build.ArtifactStagingDirectory) \n -------- $(nuget_api_key)"
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
@@ -33,33 +33,36 @@ steps:
     configuration: $(buildConfiguration)
 
 # Source: https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive#publish-artifacts-to-azure-pipelines
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet publish'
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '**/*.csproj'
-    configuration: $(buildConfiguration)
-    zipAfterPublish: false
+# - task: DotNetCoreCLI@2
+#   displayName: 'dotnet publish'
+#   inputs:
+#     command: 'publish'
+#     publishWebProjects: false
+#     projects: '**/*.csproj'
+#     configuration: $(buildConfiguration)
+#     zipAfterPublish: false
 
 # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
-- task: PublishPipelineArtifact@1
-  displayName: 'Publish artifacts'
-  inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: 'drop'
+# - task: PublishPipelineArtifact@1
+#   displayName: 'Publish artifacts'
+#   inputs:
+#     targetPath: '$(Build.ArtifactStagingDirectory)' 
+#     artifactName: 'drop'
 
-- script: dotnet pack /p:PackageVersion=$(nugetVersion)  # define version variable elsewhere in your pipeline
+- script: dotnet pack /p:PackageVersion=$(nugetVersion) -o $(Build.ArtifactStagingDirectory) --configuration $(buildConfiguration) # define version variable elsewhere in your pipeline
 
-- task: NuGetAuthenticate@1
-  inputs:
-    nuGetServiceConnections: 'nuget-srd-infra'
+# - script: dotnet nuget push $(Build.ArtifactStagingDirectory) --api-key $(nuget_api_key) --source https://api.nuget.org/v3/index.json
+#   displayName: 'dotnet nuget push'
 
-- task: NuGetCommand@2
-  inputs:
-    command: push
-    nuGetFeedType: external
-    publishFeedCredentials: 'nuget-srd-infra'
-    versioningScheme: byEnvVar
-    versionEnvVar: nugetVersion
+# - task: NuGetAuthenticate@1
+#   inputs:
+#     nuGetServiceConnections: 'nuget-srd-infra'
+
+# - task: NuGetCommand@2
+#   inputs:
+#     command: push
+#     nuGetFeedType: external
+#     publishFeedCredentials: 'nuget-srd-infra'
+#     versioningScheme: byEnvVar
+#     versionEnvVar: nugetVersion
 
