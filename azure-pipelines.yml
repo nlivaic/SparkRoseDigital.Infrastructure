@@ -47,6 +47,11 @@ stages:
           artifactName: 'drop'
           publishLocation: pipeline
 
+- stage: deploy_to_nuget
+  jobs:
+    - job: deployToNuget
+      displayName: "deploy to nuget.org"
+      steps:
       - script: dotnet nuget push $(Build.ArtifactStagingDirectory)/SparkRoseDigital.Infrastructure.$(nugetVersion).nupkg --api-key $(nuget_api_key) --source https://api.nuget.org/v3/index.json
         displayName: 'dotnet nuget push'
 
