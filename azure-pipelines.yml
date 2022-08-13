@@ -31,13 +31,27 @@ steps:
     publishTestResults: true
     configuration: $(buildConfiguration)
 
-- script: dotnet publish -o $(build.artifactStagingDirectory)
-  displayName: 'dotnet publish -o $(build.artifactStagingDirectory)'
+# - script: dotnet publish -o $(build.artifactStagingDirectory)
+#   displayName: 'dotnet publish -o $(build.artifactStagingDirectory)'
 
-- task: NuGetAuthenticate@1
+- task: DotNetCoreCLI@2
   inputs:
-    nuGetServiceConnections: 'nuget-srd-infra'
-    forceReinstallCredentialProvider: true
+    command: publish
+    # publishWebProjects: True
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
+
+# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'myWebsiteName'
+
+
+# - task: NuGetAuthenticate@1
+#   inputs:
+#     nuGetServiceConnections: 'nuget-srd-infra'
+#     forceReinstallCredentialProvider: true
 
 # - task: NuGetCommand@2
 #   inputs:
