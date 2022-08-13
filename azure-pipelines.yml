@@ -10,6 +10,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+# Versioning source: https://stackoverflow.com/a/60609868/987827
 variables:
   buildConfiguration: 'Release'
   major: '1'
@@ -48,15 +49,17 @@ steps:
     targetPath: '$(Build.ArtifactStagingDirectory)' 
     artifactName: 'drop'
 
-# - task: NuGetAuthenticate@1
-#   inputs:
-#     nuGetServiceConnections: 'nuget-srd-infra'
-#     forceReinstallCredentialProvider: true
+- script: dotnet pack /p:PackageVersion=$(nugetVersion)  # define version variable elsewhere in your pipeline
 
-# - task: NuGetCommand@2
-#   inputs:
-#     command: push
-#     nuGetFeedType: external
-#     versioningScheme: byEnvVar
-#     versionEnvVar: <VERSION_ENVIRONMENT_VARIABLE>
+- task: NuGetAuthenticate@1
+  inputs:
+    nuGetServiceConnections: 'nuget-srd-infra'
+
+- task: NuGetCommand@2
+  inputs:
+    command: push
+    nuGetFeedType: external
+    publishFeedCredentials: 'nuget-srd-infra'
+    versioningScheme: byEnvVar
+    versionEnvVar: nugetVersion
 
