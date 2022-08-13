@@ -31,9 +31,6 @@ steps:
     publishTestResults: true
     configuration: $(buildConfiguration)
 
-# - script: dotnet publish -o $(build.artifactStagingDirectory)
-#   displayName: 'dotnet publish -o $(build.artifactStagingDirectory)'
-
 # Source: https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive#publish-artifacts-to-azure-pipelines
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
