@@ -49,7 +49,7 @@ steps:
   displayName: 'Publish artifacts'
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: 'myWebsiteName'
+    artifactName: 'drop'
 
 # - task: NuGetAuthenticate@1
 #   inputs:
