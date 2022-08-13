@@ -34,6 +34,7 @@ steps:
 # - script: dotnet publish -o $(build.artifactStagingDirectory)
 #   displayName: 'dotnet publish -o $(build.artifactStagingDirectory)'
 
+# I got this from a website: 
 # - task: DotNetCoreCLI@2
 #   inputs:
 #     command: publish
@@ -55,10 +56,11 @@ steps:
 
 
 # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: 'myWebsiteName'
+# - task: PublishPipelineArtifact@1
+#   displayName: 'Publish artifacts'
+#   inputs:
+#     targetPath: '$(Build.ArtifactStagingDirectory)' 
+#     artifactName: 'myWebsiteName'
 
 
 # - task: NuGetAuthenticate@1
