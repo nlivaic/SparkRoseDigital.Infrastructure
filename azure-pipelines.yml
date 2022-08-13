@@ -34,15 +34,7 @@ steps:
 # - script: dotnet publish -o $(build.artifactStagingDirectory)
 #   displayName: 'dotnet publish -o $(build.artifactStagingDirectory)'
 
-# I got this from a website: 
-# - task: DotNetCoreCLI@2
-#   inputs:
-#     command: publish
-#     publishWebProjects: false
-#     projects: '**/*.csproj'
-#     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-#     zipAfterPublish: True
-
+# Source: https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive#publish-artifacts-to-azure-pipelines
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
   inputs:
@@ -52,16 +44,12 @@ steps:
     configuration: $(buildConfiguration)
     zipAfterPublish: false
 
-
-
-
 # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
-# - task: PublishPipelineArtifact@1
-#   displayName: 'Publish artifacts'
-#   inputs:
-#     targetPath: '$(Build.ArtifactStagingDirectory)' 
-#     artifactName: 'myWebsiteName'
-
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish artifacts'
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'myWebsiteName'
 
 # - task: NuGetAuthenticate@1
 #   inputs:
