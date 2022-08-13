@@ -34,12 +34,25 @@ steps:
 # - script: dotnet publish -o $(build.artifactStagingDirectory)
 #   displayName: 'dotnet publish -o $(build.artifactStagingDirectory)'
 
+# - task: DotNetCoreCLI@2
+#   inputs:
+#     command: publish
+#     publishWebProjects: false
+#     projects: '**/*.csproj'
+#     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+#     zipAfterPublish: True
+
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
   inputs:
-    command: publish
+    command: 'publish'
     publishWebProjects: false
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: True
+    projects: '**/*.csproj'
+    configuration: $(buildConfiguration)
+    zipAfterPublish: false
+
+
+
 
 # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
 - task: PublishPipelineArtifact@1
@@ -60,11 +73,3 @@ steps:
 #     versioningScheme: byEnvVar
 #     versionEnvVar: <VERSION_ENVIRONMENT_VARIABLE>
 
-# - task: DotNetCoreCLI@2
-#   displayName: 'dotnet publish'
-#   inputs:
-#     command: 'publish'
-#     publishWebProjects: false
-#     projects: '**/*.csproj'
-#     configuration: $(buildConfiguration)
-#     zipAfterPublish: false
