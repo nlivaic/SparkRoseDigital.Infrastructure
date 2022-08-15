@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
 	<PackageId>SparkRoseDigital.Infrastructure</PackageId>
-	<Version>$(VersionSuffix)</Version>
+	<Version>$versionSuffix$</Version>
 	<Authors>SparkRose Digital</Authors>
 	<Company>SparkRose Digital</Company>
 	<Description>
