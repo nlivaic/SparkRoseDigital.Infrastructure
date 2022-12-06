@@ -4,7 +4,7 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-trigger:
+pr:
 - master
 
 pool:
@@ -13,96 +13,82 @@ pool:
 # Versioning source: https://stackoverflow.com/a/60609868/987827
 variables:
   buildConfiguration: 'Release'
-  major: '1'
-  minor: '0'
-  revision: $[counter(variables['minor'], 1)] # This will get reset every time minor gets bumped.
-  nugetVersion: '$(major).$(minor).$(revision)'
 
 stages:
 - stage: build
   jobs:
-    - job: build
+    - job: BuildAndTest
       steps:
-      - script: echo 'Pipeline:\sSparkRoseDigital.Infrastructure version $(nugetVersion) \n------------- Build.ArtifactStagingDirectory:\s$(Build.ArtifactStagingDirectory)'
+        - checkout: self
+          fetchDepth: 0
 
-      - script: dotnet build --configuration $(buildConfiguration)
-        displayName: 'dotnet build $(buildConfiguration)'
+        - script: echo $(version)
+          displayName: 'Basic Information - Version'
+          
+        - script: echo $(Build.ArtifactStagingDirectory)
+          displayName: 'Basic Information - ArtifactStagingDirectory'
+          
+        - script: pwd
+          displayName: 'Basic Information - Current Directory'
+          
+        - script: ls -al
+          displayName: 'Basic Information - Directory Contents'
 
-      - task: DotNetCoreCLI@2
-        displayName: 'dotnet test'
-        inputs:
-          command: 'test'
-          projects: '**/*.csproj'
-          publishTestResults: true
-          configuration: $(buildConfiguration)
+        - task: gitversion/setup@0
+          displayName: Install GitVersion
+          inputs:
+            versionSpec: '5.x'
+          
+        - task: gitversion/execute@0
+          displayName: Determine Version
+          inputs:
+            useConfigFile: true
+            configFilePath: 'GitVersion.yml'
 
-      - script: dotnet pack --version-suffix '$(nugetVersion)' -o $(Build.ArtifactStagingDirectory) --configuration $(buildConfiguration) # define version variable elsewhere in your pipeline
-        displayName: 'dotnet pack'
+        - script: |
+            echo Major: $(GitVersion.Major)
+            echo Minor: $(GitVersion.Minor)
+            echo Patch: $(GitVersion.Patch)
+            echo PreReleaseTag: $(GitVersion.PreReleaseTag)
+            echo PreReleaseLabel: $(GitVersion.PreReleaseLabel)
+            echo PreReleaseNumber: $(GitVersion.PreReleaseNumber)
+            echo WeightedPreReleaseNumber: $(GitVersion.WeightedPreReleaseNumber)
+            echo BuildMetaData: $(GitVersion.BuildMetaData)
+            echo BuildMetaDataPadded: $(GitVersion.BuildMetaDataPadded)
+            echo FullBuildMetaData: $(GitVersion.FullBuildMetaData)
+            echo MajorMinorPatch: $(GitVersion.MajorMinorPatch)
+            echo SemVer: $(GitVersion.SemVer)
+            echo LegacySemVer: $(GitVersion.LegacySemVer)
+            echo LegacySemVerPadded: $(GitVersion.LegacySemVerPadded)
+            echo AssemblySemVer: $(GitVersion.AssemblySemVer)
+            echo AssemblySemFileVer: $(GitVersion.AssemblySemFileVer)
+            echo FullSemVer: $(GitVersion.FullSemVer)
+            echo InformationalVersion: $(GitVersion.InformationalVersion)
+            echo BranchName: $(GitVersion.BranchName)
+            echo EscapedBranchName: $(GitVersion.EscapedBranchName)
+            echo Sha: $(GitVersion.Sha)
+            echo ShortSha: $(GitVersion.ShortSha)
+            echo NuGetVersionV2: $(GitVersion.NuGetVersionV2)
+            echo NuGetVersion: $(GitVersion.NuGetVersion)
+            echo NuGetPreReleaseTagV2: $(GitVersion.NuGetPreReleaseTagV2)
+            echo NuGetPreReleaseTag: $(GitVersion.NuGetPreReleaseTag)
+            echo VersionSourceSha: $(GitVersion.VersionSourceSha)
+            echo CommitsSinceVersionSource: $(GitVersion.CommitsSinceVersionSource)
+            echo CommitsSinceVersionSourcePadded: $(GitVersion.CommitsSinceVersionSourcePadded)
+            echo UncommittedChanges: $(GitVersion.UncommittedChanges)
+            echo CommitDate: $(GitVersion.CommitDate)
+          displayName: Current Version $(GitVersion.FullSemVer)
 
-      # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
-      - task: PublishPipelineArtifact@1
-        displayName: 'Publish artifacts'
-        inputs:
-          targetPath: '$(Build.ArtifactStagingDirectory)' 
-          artifactName: 'drop'
-          publishLocation: pipeline
+        - script: dotnet build --configuration $(buildConfiguration)
+          displayName: 'dotnet build $(buildConfiguration)'
 
-# build must be approved before getting pushed to nuget
-- stage: wait_for_approval
-  pool: server
-  condition: eq(variables['Build.Reason'], 'IndividualCI')
-  jobs:
-    - job: waitForApproval
-      displayName: 'wait for approval'
-      # timeoutInMinutes: 1440    # 3 days before the build is rejected
-      steps:
-      - task: ManualValidation@0
-        # timeoutInMinutes: 1440    # 3 days before the task is rejected.
-        inputs:
-          notifyUsers: $(notify_user_for_approval_1)
-          instructions: 'Please validate the build before pushing to nuget.org'
-          onTimeout: reject
+        - task: DotNetCoreCLI@2
+          displayName: 'dotnet test'
+          inputs:
+            command: 'test'
+            projects: '**/*.csproj'
+            publishTestResults: true
+            configuration: $(buildConfiguration)
 
-- stage: deploy_to_nuget
-  condition: eq(variables['Build.Reason'], 'IndividualCI')
-  jobs:
-    - job: deployToNuget
-      displayName: "deploy to nuget.org"
-      steps:
-      - task: DownloadPipelineArtifact@2
-        inputs:
-          buildType: 'current'
-          artifactName: 'drop'
-          downloadPath: '$(Pipeline.Workspace)/drop'
-      
-      - script: dotnet nuget push $(Pipeline.Workspace)/drop/SparkRoseDigital.Infrastructure.$(nugetVersion).nupkg --api-key $(nuget_api_key) --source https://api.nuget.org/v3/index.json
-        displayName: 'dotnet nuget push'
-
-# Source: https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive#publish-artifacts-to-azure-pipelines
-# - task: DotNetCoreCLI@2
-#   displayName: 'dotnet publish'
-#   inputs:
-#     command: 'publish'
-#     publishWebProjects: false
-#     projects: '**/*.csproj'
-#     configuration: $(buildConfiguration)
-#     zipAfterPublish: false
-
-# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
-# - task: PublishPipelineArtifact@1
-#   displayName: 'Publish artifacts'
-#   inputs:
-#     targetPath: '$(Build.ArtifactStagingDirectory)' 
-#     artifactName: 'drop'
-
-# - task: NuGetAuthenticate@1
-#   inputs:
-#     nuGetServiceConnections: 'nuget-srd-infra'
-
-# - task: NuGetCommand@2
-#   inputs:
-#     command: push
-#     nuGetFeedType: external
-#     publishFeedCredentials: 'nuget-srd-infra'
-#     versioningScheme: byEnvVar
-#     versionEnvVar: nugetVersion
+        - script: dotnet pack --version-suffix '$(GitVersion.SemVer)' -o $(Build.ArtifactStagingDirectory) --configuration $(buildConfiguration)
+          displayName: 'dotnet pack'
