@@ -7,14 +7,10 @@
 pr:
   branches:
     include:
+    - feature/*
+    - fix/*
+    exclude:
     - master
-    exclude:
-    - "*"
-
-trigger:
-  branches:
-    exclude:
-    - "*"
 
 pool:
   vmImage: ubuntu-latest
