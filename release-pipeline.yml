@@ -21,7 +21,7 @@ jobs:
     runOnce:
       deploy:
         steps:
-        - download: none
+        - download: current
         # - download: Build/infra_build_pipeline #tu ide ime build pipelinea?
         #   artifact: drop
         #   displayName: "Download build artifact"
@@ -32,10 +32,11 @@ jobs:
         
         - script: echo $(resources.pipeline.build_pipeline.runID)
 
-        - task: DownloadPipelineArtifact@2
-          inputs:
-            buildType: 'current'
-            artifactName: 'drop'
-            downloadPath: '$(Pipeline.Workspace)/drop'
+        # - task: DownloadPipelineArtifact@2
+        #   inputs:
+        #     buildType: 'current'
+        #     artifactName: 'drop'
+        #     downloadPath: '$(Pipeline.Workspace)/drop'
+
         # - script: dotnet nuget push $(Pipeline.Workspace)/drop/SparkRoseDigital.Infrastructure.$(resources.pipeline.build_pipeline.runID).nupkg --api-key $(nuget_api_key) --source https://api.nuget.org/v3/index.json
         #   displayName: 'dotnet nuget push'
