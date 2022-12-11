@@ -19,13 +19,15 @@ jobs:
     runOnce:
       deploy:
         steps:
-        # - download: infra_build_pipeline #tu ide ime build pipelinea?
-        #   artifact: drop
+        - download: infra_build_pipeline #tu ide ime build pipelinea?
+          artifact: drop
         # - task: ExtractFiles@1
         #   inputs:
         #     archiveFilePatterns: '$(PIPELINE.WORKSPACE)/drop/$(resources.pipeline.myappbuild.runID).zip'
-        - task: DownloadPipelineArtifact@2
-          inputs:
-            buildType: 'current'
-            artifactName: 'drop'
-            downloadPath: '$(Pipeline.Workspace)/drop'
+
+        # ovo ne treba, jer deploy job sam downloada.
+        # - task: DownloadPipelineArtifact@2
+        #   inputs:
+        #     buildType: 'current'
+        #     artifactName: 'drop'
+        #     downloadPath: '$(Pipeline.Workspace)/drop'
