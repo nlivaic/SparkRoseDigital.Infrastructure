@@ -29,17 +29,6 @@ jobs:
         # - task: ExtractFiles@1
         #   inputs:
         #     archiveFilePatterns: '$(PIPELINE.WORKSPACE)/drop/$(resources.pipeline.myappbuild.runID).zip'
-        
-        - powershell: |
-            $url="https://dev.azure.com/{organization}/{project}/_apis/build/definitions/{definitionId}?includeLatestBuilds=true&api-version=5.1"
-            $result = Invoke-RestMethod -Uri $url -Headers @{authorization = "Bearer $(System.AccessToken)"} -Method Get
-            $buildId = $result.latestBuild.id
-            echo "##vso[task.setvariable variable=buildId;isOutput=true]$buildId" #set a variable to refer to the buildid 
-          name: setvarStep
-
-        #get the variable set in above task.
-        - script: |
-            echo $(setvarStep.buildId)
 
         - task: DownloadPipelineArtifact@2
           inputs:
