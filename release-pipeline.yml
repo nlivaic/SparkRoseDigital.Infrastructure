@@ -21,6 +21,7 @@ jobs:
     runOnce:
       deploy:
         steps:
+        - download: none
         # - download: Build/infra_build_pipeline #tu ide ime build pipelinea?
         #   artifact: drop
         #   displayName: "Download build artifact"
