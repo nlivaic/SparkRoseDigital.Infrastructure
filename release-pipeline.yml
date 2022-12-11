@@ -21,9 +21,9 @@ jobs:
     runOnce:
       deploy:
         steps:
-        - download: Build/infra_build_pipeline #tu ide ime build pipelinea?
-          artifact: drop
-          displayName: "Download build artifact"
+        # - download: Build/infra_build_pipeline #tu ide ime build pipelinea?
+        #   artifact: drop
+        #   displayName: "Download build artifact"
 
         # - task: ExtractFiles@1
         #   inputs:
