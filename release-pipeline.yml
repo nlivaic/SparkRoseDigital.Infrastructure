@@ -35,7 +35,7 @@ jobs:
         - task: DownloadPipelineArtifact@2
           inputs:
             buildType: 'specific'
-            definition: build_pipeline
+            definition: infra_build_pipeline
             buildVersionToDownload: 'latest'
             artifactName: 'drop'
             project: 'SRD.Infrastructure'
