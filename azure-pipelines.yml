@@ -11,12 +11,6 @@ trigger:
 
 pr: none
 
-resources:
-  pipelines:
-  - pipeline: MultipleArtifact
-    project: 'DevOps Manual'
-    source: 'kmadof.devops-manual (64)'
-
 pool:
   vmImage: ubuntu-latest
 
