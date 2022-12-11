@@ -103,7 +103,8 @@ stages:
           #condition: ne(variables['Build.Reason'], 'PullRequest')
           displayName: 'Publish artifacts'
           inputs:
-            targetPath: '$(Build.ArtifactStagingDirectory)' 
+            # targetPath: '$(Build.ArtifactStagingDirectory)' 
+            targetPath: '$(Pipeline.Workspace)'
             artifactName: 'drop'
             publishLocation: pipeline
 
