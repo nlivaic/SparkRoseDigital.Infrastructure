@@ -110,7 +110,7 @@ stages:
   jobs:
     - job: deployToNuget
       variables:
-        gitVersion: dependencies.build.outputs['BuildAndTest.determine_version.GitVersion.SemVer']
+        gitVersion: stageDependencies.build.BuildAndTest.outputs['determine_version.GitVersion.SemVer']
       displayName: "deploy to nuget.org"
       steps:
       - task: DownloadPipelineArtifact@2
