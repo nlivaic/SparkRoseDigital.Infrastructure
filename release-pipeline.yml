@@ -36,7 +36,7 @@ jobs:
             buildType: 'specific'
             definition: infra_build_pipeline
             buildVersionToDownload: 'latest'
-            artifactName: 'drop'
+            #artifactName: 'drop'
             project: 'SRD.Infrastructure'
             downloadPath: '$(Pipeline.Workspace)/drop'
 
