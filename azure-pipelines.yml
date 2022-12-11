@@ -99,13 +99,13 @@ stages:
           displayName: 'dotnet pack'
 
         # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
-        # - task: PublishPipelineArtifact@1
-        #   #condition: ne(variables['Build.Reason'], 'PullRequest')
-        #   displayName: 'Publish artifacts'
-        #   inputs:
-        #     targetPath: '$(Build.ArtifactStagingDirectory)' 
-        #     artifactName: 'drop'
-        #     publishLocation: pipeline
+        - task: PublishPipelineArtifact@1
+          #condition: ne(variables['Build.Reason'], 'PullRequest')
+          displayName: 'Publish artifacts'
+          inputs:
+            targetPath: '$(Build.ArtifactStagingDirectory)' 
+            artifactName: 'drop'
+            publishLocation: pipeline
 
 # - stage: deploy_to_nuget
 #   jobs:
