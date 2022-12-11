@@ -1,14 +1,15 @@
 trigger:
 - none
 
+# Pipeline resource defined as per https://bit.ly/3PhwhRk
 resources:
   pipelines:
-  - pipeline: infra_release_pipeline
-    source: infra_build_pipeline  	# this must match  the build pipeline name in ADO.
-    project: SRD.Infrastructure
+  - pipeline: build_pipeline        # Used to reference the pipeline reference from other parts of the code.
+    source: infra_build_pipeline  	# This must match  the build pipeline name in ADO.
+                                    # By default, pipelines are named after the repository that contains the pipeline.
     trigger:
       branches:
-      - master
+      - master                      # Will get triggered whenever the source pipeline runs on master branch.
 
 jobs:
 - deployment: infra_deploy_to_nuget
