@@ -5,6 +5,7 @@ resources:
   pipelines:
   - pipeline: infra_release_pipeline
     source: infra_build_pipeline  	# this must match  the build pipeline name in ADO.
+    project: SRD.Infrastructure
     trigger:
       branches:
       - master
