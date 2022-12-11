@@ -40,6 +40,8 @@ jobs:
             project: 'SRD.Infrastructure'
             downloadPath: '$(Pipeline.Workspace)/drop'
 
+        - script: echo ls -al
+
         - script: echo ls -al ./drop
 
         # - script: dotnet nuget push $(Pipeline.Workspace)/drop/SparkRoseDigital.Infrastructure.$(resources.pipeline.build_pipeline.runID).nupkg --api-key $(nuget_api_key) --source https://api.nuget.org/v3/index.json
