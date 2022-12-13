@@ -38,6 +38,9 @@ jobs:
             artifactName: 'drop'
             project: 'SRD.Infrastructure'
             downloadPath: '$(Pipeline.Workspace)/drop'
+          
+        - script: ls -al; ls -al ./drop
+          displayName: 'Basic Information - Directory Contents'
 
         # - script: dotnet nuget push $(Pipeline.Workspace)/drop/SparkRoseDigital.Infrastructure.$(resources.pipeline.build_pipeline.runID).nupkg --api-key $(nuget_api_key) --source https://api.nuget.org/v3/index.json
         #   displayName: 'dotnet nuget push'
