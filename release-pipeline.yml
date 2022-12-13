@@ -54,5 +54,5 @@ jobs:
         - script: ls -al ../drop/s
           displayName: 'ls ../drop/s'
 
-        # - script: dotnet nuget push $(Pipeline.Workspace)/drop/SparkRoseDigital.Infrastructure.$(resources.pipeline.build_pipeline.runID).nupkg --api-key $(nuget_api_key) --source https://api.nuget.org/v3/index.json
-        #   displayName: 'dotnet nuget push'
+        - script: dotnet nuget push $(Pipeline.Workspace)/drop/a/SparkRoseDigital.Infrastructure.*.nupkg --api-key $(nuget_api_key) --source https://api.nuget.org/v3/index.json
+          displayName: 'dotnet nuget push'
