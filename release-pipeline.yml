@@ -39,20 +39,20 @@ jobs:
             project: 'SRD.Infrastructure'
             downloadPath: '$(Pipeline.Workspace)/drop'
           
-        - script: ls -al ../
-          displayName: 'ls ../'
+        # - script: ls -al ../
+        #   displayName: 'ls ../'
           
-        - script: ls -al ../drop
-          displayName: 'ls ../drop'
+        # - script: ls -al ../drop
+        #   displayName: 'ls ../drop'
           
-        - script: ls -al ../drop/a
-          displayName: 'ls ../drop/a'
+        # - script: ls -al ../drop/a
+        #   displayName: 'ls ../drop/a'
           
-        - script: ls -al ../drop/b
-          displayName: 'ls ../drop/b'
+        # - script: ls -al ../drop/b
+        #   displayName: 'ls ../drop/b'
           
-        - script: ls -al ../drop/s
-          displayName: 'ls ../drop/s'
+        # - script: ls -al ../drop/s
+        #   displayName: 'ls ../drop/s'
 
         - script: dotnet nuget push $(Pipeline.Workspace)/drop/a/SparkRoseDigital.Infrastructure.*.nupkg --api-key $(nuget_api_key) --source https://api.nuget.org/v3/index.json
           displayName: 'dotnet nuget push'
