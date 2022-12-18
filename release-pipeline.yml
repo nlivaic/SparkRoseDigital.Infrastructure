@@ -5,14 +5,11 @@ trigger:
 resources:
   pipelines:
   - pipeline: build_pipeline        # Used to reference the pipeline reference from other parts of the code.
-    source: 'infra_build_pipeline'  # This must match  the build pipeline name in ADO.
+    source: infra_build_pipeline  	# This must match  the build pipeline name in ADO.
                                     # By default, pipelines are named after the ADO build pipeline name.
     trigger:
       branches:
-        include:
-        - master                      # Will get triggered whenever the source pipeline runs on master branch.
-        exclude:
-        - '*'
+      - master                      # Will get triggered whenever the source pipeline runs on master branch.
 
 jobs:
 - deployment: infra_deploy_to_nuget
