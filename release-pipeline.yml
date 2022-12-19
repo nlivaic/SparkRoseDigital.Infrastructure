@@ -1,6 +1,6 @@
 trigger: none
 pr: none
-name: $(resources.pipeline.build_pipeline.runName)
+name: '$(resources.pipeline.build_pipeline.runName)'
 
 # Pipeline resource defined as per https://bit.ly/3PhwhRk
 resources:
