@@ -23,18 +23,6 @@ jobs:
         steps:
         - download: none
 
-        - task: gitversion/setup@0
-          displayName: Install GitVersion
-          inputs:
-            versionSpec: '5.x'
-          
-        - task: gitversion/execute@0
-          displayName: Determine Version
-          name: determine_version
-          inputs:
-            useConfigFile: true
-            configFilePath: 'GitVersion.yml'
-
         - task: DownloadPipelineArtifact@2
           inputs:
             buildType: 'specific'
