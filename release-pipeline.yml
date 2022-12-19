@@ -22,20 +22,20 @@ jobs:
       deploy:
         steps:
         - download: none
-        
+
         - script: |
-            echo resources.pipeline.build_pipeline.projectName 
-            echo resources.pipeline.build_pipeline.projectID 
-            echo resources.pipeline.build_pipeline.pipelineName 
-            echo resources.pipeline.build_pipeline.pipelineID 
-            echo resources.pipeline.build_pipeline.runName 
-            echo resources.pipeline.build_pipeline.runID
-            echo resources.pipeline.build_pipeline.runURI
-            echo resources.pipeline.build_pipeline.sourceBranch 
-            echo resources.pipeline.build_pipeline.sourceCommit
-            echo resources.pipeline.build_pipeline.sourceProvider 
-            echo resources.pipeline.build_pipeline.requestedFor
-            echo resources.pipeline.build_pipeline.requestedForID
+            echo $(resources.pipeline.build_pipeline.projectName)
+            echo $(resources.pipeline.build_pipeline.projectID)
+            echo $(resources.pipeline.build_pipeline.pipelineName)
+            echo $(resources.pipeline.build_pipeline.pipelineID)
+            echo $(resources.pipeline.build_pipeline.runName)
+            echo $(resources.pipeline.build_pipeline.runID)
+            echo $(resources.pipeline.build_pipeline.runURI)
+            echo $(resources.pipeline.build_pipeline.sourceBranch)
+            echo $(resources.pipeline.build_pipeline.sourceCommit)
+            echo $(resources.pipeline.build_pipeline.sourceProvider)
+            echo $(resources.pipeline.build_pipeline.requestedFor)
+            echo $(resources.pipeline.build_pipeline.requestedForID)
 
         - task: DownloadPipelineArtifact@2
           inputs:
