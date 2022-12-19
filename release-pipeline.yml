@@ -11,8 +11,6 @@ resources:
       branches:
       - master                      # Will get triggered whenever the source pipeline runs on master branch.
 
-name: '$(resources.pipeline.build_pipeline.runName)'
-
 jobs:
 - deployment: infra_deploy_to_nuget
   displayName: Deploy to NuGet
@@ -23,6 +21,16 @@ jobs:
     runOnce:
       deploy:
         steps:
+        - task: PowerShell@2
+          displayName: 'Create version number'
+          name: 'CreateVersionNumber'
+          inputs:
+            targetType: 'inline'
+            script: |
+              $newVersion = "$(resources.pipeline.build_pipeline.runName)"
+              [string] $buildName = "$($newVersion)"
+              Write-Host "##vso[build.updatebuildnumber]$buildName"
+
         - download: none
 
         - task: DownloadPipelineArtifact@2
