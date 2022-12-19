@@ -23,20 +23,6 @@ jobs:
         steps:
         - download: none
 
-        - script: |
-            echo $(resources.pipeline.build_pipeline.projectName)
-            echo $(resources.pipeline.build_pipeline.projectID)
-            echo $(resources.pipeline.build_pipeline.pipelineName)
-            echo $(resources.pipeline.build_pipeline.pipelineID)
-            echo $(resources.pipeline.build_pipeline.runName)
-            echo $(resources.pipeline.build_pipeline.runID)
-            echo $(resources.pipeline.build_pipeline.runURI)
-            echo $(resources.pipeline.build_pipeline.sourceBranch)
-            echo $(resources.pipeline.build_pipeline.sourceCommit)
-            echo $(resources.pipeline.build_pipeline.sourceProvider)
-            echo $(resources.pipeline.build_pipeline.requestedFor)
-            echo $(resources.pipeline.build_pipeline.requestedForID)
-
         - task: DownloadPipelineArtifact@2
           inputs:
             buildType: 'specific'
@@ -46,5 +32,5 @@ jobs:
             project: 'SRD.Infrastructure'
             downloadPath: '$(Pipeline.Workspace)/drop'
 
-        - script: dotnet nuget push $(Pipeline.Workspace)/drop/a/SparkRoseDigital.Infrastructure.*.nupkg --api-key $(nuget_api_key) --source https://api.nuget.org/v3/index.json
+        - script: dotnet nuget push $(Pipeline.Workspace)/drop/a/SparkRoseDigital.Infrastructure.$(resources.pipeline.build_pipeline.pipelineID).nupkg --api-key $(nuget_api_key) --source https://api.nuget.org/v3/index.json
           displayName: 'dotnet nuget push'
