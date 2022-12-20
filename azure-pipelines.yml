@@ -1,12 +1,9 @@
-pr:
+trigger:
   branches:
     include:
     - master
-    exclude:
-    - feature/*
-    - fix/*
 
-trigger: none
+pr: none
 
 pool:
   vmImage: ubuntu-latest
@@ -42,6 +39,7 @@ stages:
           
         - task: gitversion/execute@0
           displayName: Determine Version
+          name: determine_version
           inputs:
             useConfigFile: true
             configFilePath: 'GitVersion.yml'
@@ -93,3 +91,13 @@ stages:
 
         - script: dotnet pack --version-suffix '$(GitVersion.SemVer)' -o $(Build.ArtifactStagingDirectory) --configuration $(buildConfiguration)
           displayName: 'dotnet pack'
+
+        # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
+        - task: PublishPipelineArtifact@1
+          #condition: ne(variables['Build.Reason'], 'PullRequest')
+          displayName: 'Publish artifacts'
+          inputs:
+            # targetPath: '$(Build.ArtifactStagingDirectory)' 
+            targetPath: '$(Pipeline.Workspace)'
+            artifactName: 'drop'
+            publishLocation: pipeline

@@ -1,9 +1,3 @@
-# ASP.NET Core
-
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
   branches:
     include:
@@ -100,26 +94,8 @@ stages:
 
         # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
         - task: PublishPipelineArtifact@1
-          #condition: ne(variables['Build.Reason'], 'PullRequest')
           displayName: 'Publish artifacts'
           inputs:
-            # targetPath: '$(Build.ArtifactStagingDirectory)' 
             targetPath: '$(Pipeline.Workspace)'
             artifactName: 'drop'
             publishLocation: pipeline
-
-# - stage: deploy_to_nuget
-#   jobs:
-#     - job: deployToNuget
-#       variables:
-#         gitVersion: $[stageDependencies.build.BuildAndTest.outputs['determine_version.GitVersion.SemVer']]
-#       displayName: "deploy to nuget.org"
-#       steps:
-#       - task: DownloadPipelineArtifact@2
-#         inputs:
-#           buildType: 'current'
-#           artifactName: 'drop'
-#           downloadPath: '$(Pipeline.Workspace)/drop'
-      
-#       - script: dotnet nuget push $(Pipeline.Workspace)/drop/SparkRoseDigital.Infrastructure.$(gitVersion).nupkg --api-key $(nuget_api_key) --source https://api.nuget.org/v3/index.json
-#         displayName: 'dotnet nuget push'
