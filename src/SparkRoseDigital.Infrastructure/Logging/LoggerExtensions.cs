@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
+using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,7 @@ using SparkRoseDigital.Infrastructure.Logging.Middleware;
 
 namespace SparkRoseDigital.Infrastructure.Logging
 {
+
     public static class LoggerExtensions
     {
         public static void ConfigureSerilogLogger(string environmentVariable)
@@ -31,8 +33,7 @@ namespace SparkRoseDigital.Infrastructure.Logging
                 .Enrich.WithExceptionDetails()
                 .ReadFrom.Configuration(configuration)
                 .WriteTo.Console()
-                .WriteTo.Seq(configuration["Logs:Url"])
-                .CreateLogger();
+                .CreateBootstrapLogger();
         }
 
         /// <summary>
