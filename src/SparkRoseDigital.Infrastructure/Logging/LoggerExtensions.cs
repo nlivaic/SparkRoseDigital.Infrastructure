@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
-using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,7 +31,6 @@ namespace SparkRoseDigital.Infrastructure.Logging
                 .Enrich.WithSpan()
                 .Enrich.WithExceptionDetails()
                 .ReadFrom.Configuration(configuration)
-                .WriteTo.Console()
                 .CreateBootstrapLogger();
         }
 
