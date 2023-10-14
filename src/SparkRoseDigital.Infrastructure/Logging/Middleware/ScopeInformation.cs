@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Identity.Web;
 
 namespace SparkRoseDigital.Infrastructure.Logging.Middleware
 {
@@ -18,7 +19,7 @@ namespace SparkRoseDigital.Infrastructure.Logging.Middleware
                 {
                     "UserId",
                     context.User.Identity.IsAuthenticated
-                        ? context.User.Claims.Single(c => c.Type == "sub").ToString()
+                        ? context.User.Claims.Single(c => c.Type == ClaimConstants.ObjectId).ToString()
                         : "Anonymous"
                 },
                 {
